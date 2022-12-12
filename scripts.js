@@ -16,3 +16,28 @@ function getComputerChoice() {
       return 'scissors';
   };
 }
+
+//Create a function that plays a single round of Rock Paper Scissors and
+//declares the winner of the round
+function playRound(playerSelection, computerSelection) {
+  //Make playerSelection in lowercase for future comparisons with
+  //computerSelection
+  playerSelection = playerSelection.toLowerCase();
+  //Declare the winner of the round
+  //Declare variable wordBeats in order to get grammar right
+  let wordBeats;
+  switch (playerSelection + computerSelection) {
+    case "rockpaper":
+    case "scissorsrock":
+    case "paperscissors":
+      wordBeats = (computerSelection === "scissors" ? "beat" : "beats");
+      return `You lose: ${computerSelection} ${wordBeats} ${playerSelection}.`;
+    case "paperrock":
+    case "rockscissors":
+    case "scissorspaper":
+      wordBeats = (playerSelection === "scissors" ? "beat" : "beats");
+      return `You win: ${playerSelection} ${wordBeats} ${computerSelection}.`;
+    default:
+      return "It's a draw: next round!";
+  };
+}
