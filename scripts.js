@@ -39,20 +39,39 @@ function playRound(playerSelection, computerSelection) {
 }
 
 //Create a function that plays 5 rounds of Rock Paper Scissors, keeps score and
-//reports a winner or loser at the end
+//reports the results of each round and the winner at the end
 function game() {
   //Make 5 rounds of playRound
   let playerChoice, computerChoice;
+  let playerRoundResult;
+  let playerWinsMinusLosses = 0;
   //Declare variable wordBeats in order to get grammar right
   let wordBeats;
   for (let i = 0; i < 5; i++) {
     //Get player's choice from prompt
-    playerChoice = window.prompt("Rock, or Paper, or Scissors?");
+    playerChoice = window.prompt("Rock, or Paper, or Scissors?").toLowerCase();
     //Get computer's choice
     computerChoice = getComputerChoice();
     //Play 1 round of the game
-    console.log(playRound(playerChoice, computerChoice));
-    wordBeats = (computerSelection === "scissors" ? "beat" : "beats");
-    return `You lose: ${computerSelection} ${wordBeats} ${playerSelection}.`;
+    playerRoundResult = playRound(playerChoice, computerChoice);
+    if (playerRoundResult === "loss") {
+      playerWinsMinusLosses -= 1;
+      wordBeats = (computerChoice === "scissors" ? "beat" : "beats");
+      console.log(`You lose: ${computerChoice} ${wordBeats} ${playerChoice}.`);
+    } else if (playerRoundResult === "win") {
+      playerWinsMinusLosses += 1;
+      wordBeats = (playerChoice === "scissors" ? "beat" : "beats");
+      console.log(`You win: ${playerChoice} ${wordBeats} ${computerChoice}.`);
+    } else {
+      console.log("It's a draw!");
+    };
+  };
+  //Display the winner of the game
+  if (playerWinsMinusLosses < 0) {
+    console.log("Computer won the game!");
+  } else if (playerWinsMinusLosses > 0) {
+    console.log("You won the game!");
+  } else {
+    console.log("You have a draw with the computer!");
   };
 };
