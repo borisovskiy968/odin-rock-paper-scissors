@@ -41,3 +41,18 @@ function playRound(playerSelection, computerSelection) {
       return "It's a draw: next round!";
   };
 }
+
+//Create a function that plays 5 rounds of Rock Paper Scissors, keeps score and
+//reports a winner or loser at the end
+function game() {
+  //Make 5 rounds of playRound
+  let playerChoice, computerChoice;
+  for (let i = 0; i < 5; i++) {
+    //Get player's choice from prompt
+    playerChoice = window.prompt("Rock, or Paper, or Scissors?");
+    //Get computer's choice
+    computerChoice = getComputerChoice();
+    //Play 1 round of the game
+    console.log(playRound(playerChoice, computerChoice));
+  };
+};
