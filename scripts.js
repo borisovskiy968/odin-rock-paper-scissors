@@ -18,27 +18,23 @@ function getComputerChoice() {
 }
 
 //Create a function that plays a single round of Rock Paper Scissors and
-//declares the winner of the round
+//declares player's result of the round: win, loss, draw
 function playRound(playerSelection, computerSelection) {
   //Make playerSelection in lowercase for future comparisons with
   //computerSelection
   playerSelection = playerSelection.toLowerCase();
-  //Declare the winner of the round
-  //Declare variable wordBeats in order to get grammar right
-  let wordBeats;
+  //Declare player's result of the round
   switch (playerSelection + computerSelection) {
     case "rockpaper":
     case "scissorsrock":
     case "paperscissors":
-      wordBeats = (computerSelection === "scissors" ? "beat" : "beats");
-      return `You lose: ${computerSelection} ${wordBeats} ${playerSelection}.`;
+      return "loss";
     case "paperrock":
     case "rockscissors":
     case "scissorspaper":
-      wordBeats = (playerSelection === "scissors" ? "beat" : "beats");
-      return `You win: ${playerSelection} ${wordBeats} ${computerSelection}.`;
+      return "win";
     default:
-      return "It's a draw: next round!";
+      return "draw";
   };
 }
 
@@ -47,6 +43,8 @@ function playRound(playerSelection, computerSelection) {
 function game() {
   //Make 5 rounds of playRound
   let playerChoice, computerChoice;
+  //Declare variable wordBeats in order to get grammar right
+  let wordBeats;
   for (let i = 0; i < 5; i++) {
     //Get player's choice from prompt
     playerChoice = window.prompt("Rock, or Paper, or Scissors?");
@@ -54,5 +52,7 @@ function game() {
     computerChoice = getComputerChoice();
     //Play 1 round of the game
     console.log(playRound(playerChoice, computerChoice));
+    wordBeats = (computerSelection === "scissors" ? "beat" : "beats");
+    return `You lose: ${computerSelection} ${wordBeats} ${playerSelection}.`;
   };
 };
