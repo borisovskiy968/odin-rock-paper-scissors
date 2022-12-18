@@ -76,6 +76,47 @@ function game() {
   };
 };
 
+//Declare variables which is set to contain scores
+let playerScore = 0;
+let computerScore = 0;
+
+//Create a function that plays rounds of RPS until either player or computer
+//reaches 5 points to become the winner
+function game2 (e) {
+  let scoreText = "";
+  //Declare variable wordBeats in order to get grammar right
+  let wordBeats;
+  //Get player's selection
+  playerSelection = e.target.textContent.toLowerCase();
+  //Get computer's selection
+  computerSelection = getComputerChoice();
+  //Play 1 round of the game
+  playerRoundResult = playRound(playerSelection, computerSelection);
+  if (playerRoundResult === "loss") {
+    computerScore++;
+    wordBeats = (computerSelection === "scissors" ? "beat" : "beats");
+    scoreText += `You lose: ${computerSelection} ${wordBeats} ${playerSelection}.` +
+      ` The running score: you ${playerScore} : ${computerScore} computer.`;
+  } else if (playerRoundResult === "win") {
+    playerScore++;
+    wordBeats = (playerSelection === "scissors" ? "beat" : "beats");
+    scoreText += `You win: ${playerSelection} ${wordBeats} ${computerSelection}.` +
+      ` The running score: you ${playerScore} : ${computerScore} computer.`;
+  } else {
+    scoreText += `It's a draw!` +
+      ` The running score: you ${playerScore} : ${computerScore} computer.`;
+  }
+  //Check for a winner
+  if (computerScore === 5) {
+    playerScore = computerScore = 0;
+    scoreText += " Computer is the winner!";
+  } else if (playerScore === 5) {
+    playerScore = computerScore = 0;
+    scoreText += " You are the winner!"
+  }
+  rps_par.textContent = scoreText;
+}
+
 //Bind to Rock-Paper-Scissors buttons which are for getting player's choice and
 //bind to the paragraph which is to display the running score
 const rps_par = document.querySelector("p.rps");
@@ -84,4 +125,4 @@ const rps_buttons = document.querySelectorAll("button.rps");
 //Play round on a button click
 rps_buttons.forEach(
   btn => btn.addEventListener(
-    "click", e => rps_par.textContent = playRound(e.target.textContent, getComputerChoice())));
+    "click", e => game2(e)));
