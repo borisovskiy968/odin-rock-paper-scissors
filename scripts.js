@@ -75,3 +75,13 @@ function game() {
     console.log("You have a draw with the computer!");
   };
 };
+
+//Bind to Rock-Paper-Scissors buttons which are for getting player's choice and
+//bind to the paragraph which is to display the running score
+const rps_par = document.querySelector("p.rps");
+const rps_buttons = document.querySelectorAll("button.rps");
+
+//Play round on a button click
+rps_buttons.forEach(
+  btn => btn.addEventListener(
+    "click", e => rps_par.textContent = playRound(e.target.textContent, getComputerChoice())));
